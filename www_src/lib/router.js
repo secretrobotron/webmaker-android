@@ -1,4 +1,5 @@
 var {parseJSON} = require('./jsonUtils');
+var qs = require('qs');
 
 module.exports = {
 
@@ -21,6 +22,7 @@ module.exports = {
         params = parseJSON(hit);
       }
     } else {
+
       params = {
         mode: 'play', // 'edit', 'play', 'link'
         user: 1,
@@ -29,6 +31,17 @@ module.exports = {
         element: 1,
         propertyName: 'borderColor'
       };
+
+      if (window.location.search.length > 0) {
+        var parsedQueryString = qs.parse(window.location.search.substr(1));
+        if (parsedQueryString.author) {
+          params.user = parsedQueryString.author;
+        }
+        if (parsedQueryString.project) {
+          params.project = parsedQueryString.project;
+        }
+      }
+
     }
 
     return params;
