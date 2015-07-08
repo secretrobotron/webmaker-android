@@ -21,7 +21,7 @@ var Moderate = React.createClass({
 
     this.setState({loading: true});
     api({
-      uri: '/projects' + (query.page ? '/?page=' + query.page : '') ,
+      uri: '/projects/?count=100' + (query.page ? '&page=' + query.page : '') ,
       useCache: true
     }, (err, body) => {
       this.setState({loading: false});
